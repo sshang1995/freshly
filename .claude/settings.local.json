@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(brew install:*)",
+      "Bash(/opt/homebrew/bin/brew install:*)",
+      "Read(//usr/local/bin/**)",
+      "Read(//Users/shushang/homebrew/bin/**)",
+      "Read(//usr/**)",
+      "Bash(echo $PATH)",
+      "Bash(xcodebuild:*)",
+      "Bash(git clone:*)",
+      "Read(//private/tmp/xcodegen/**)",
+      "Bash(swift build -c release)",
+      "Bash(/tmp/xcodegen/.build/release/xcodegen generate:*)",
+      "Bash(xcrun simctl:*)",
+      "Bash(open:*)",
+      "Skill(claude-api)"
+    ]
+  }
+}
