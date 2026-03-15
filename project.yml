@@ -22,11 +22,14 @@ targets:
       Release: Config/Release.xcconfig
     settings:
       base:
+        MARKETING_VERSION: "1.0.0"
+        CURRENT_PROJECT_VERSION: "1"
         SWIFT_VERSION: "5.9"
-        PRODUCT_BUNDLE_IDENTIFIER: com.yourname.ExpiredItem
+        PRODUCT_BUNDLE_IDENTIFIER: com.shushang.freshly
         IPHONEOS_DEPLOYMENT_TARGET: "17.0"
         TARGETED_DEVICE_FAMILY: "1"
         INFOPLIST_FILE: ExpiredItem/Info.plist
         CODE_SIGN_STYLE: Automatic
         DEVELOPMENT_TEAM: ""
         ENABLE_USER_SCRIPT_SANDBOXING: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon

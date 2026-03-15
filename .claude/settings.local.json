@@ -14,7 +14,8 @@
       "Bash(/tmp/xcodegen/.build/release/xcodegen generate:*)",
       "Bash(xcrun simctl:*)",
       "Bash(open:*)",
-      "Skill(claude-api)"
+      "Skill(claude-api)",
+      "Bash(python3:*)"
     ]
   }
 }

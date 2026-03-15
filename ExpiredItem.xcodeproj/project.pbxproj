@@ -28,6 +28,7 @@
 		A81C7E6E2F5FB62000BD6D98 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81C7E6D2F5FB62000BD6D98 /* RecipeDetailView.swift */; };
 		A81C7E702F604F4800BD6D98 /* BarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81C7E6F2F604F4800BD6D98 /* BarcodeScannerView.swift */; };
 		A81C7E722F604F7800BD6D98 /* BarcodeProductService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81C7E712F604F7800BD6D98 /* BarcodeProductService.swift */; };
+		AA1111AA1111AA1111AA1111 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A81C7E732F61121500BD6D98 /* Assets.xcassets */; };
 		AF91C13082D748D78A94C1A1 /* AIRecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C44A525AF549CA9F0D180A /* AIRecipeService.swift */; };
 		B0863D9F95E8C12059A882D1 /* OnboardingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EB91B4AC10D15ED815E446 /* OnboardingContainerView.swift */; };
 		B72E28E4EF5F302E06C2B472 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A785B8E5F21AE4D88DE2BD /* HomeView.swift */; };
@@ -70,6 +71,8 @@
 		A81C7E6D2F5FB62000BD6D98 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 		A81C7E6F2F604F4800BD6D98 /* BarcodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeScannerView.swift; sourceTree = "<group>"; };
 		A81C7E712F604F7800BD6D98 /* BarcodeProductService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeProductService.swift; sourceTree = "<group>"; };
+		A81C7E732F61121500BD6D98 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A81C7E752F6116DA00BD6D98 /* Assets 2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets 2.xcassets"; sourceTree = "<group>"; };
 		AC068F93453C400B321CC90C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BB43D5E6725349906A8D6182 /* ModelContainerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelContainerFactory.swift; sourceTree = "<group>"; };
 		BB921AB45779936B996FADB1 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
@@ -229,6 +232,8 @@
 		F08724A223687B45DF5A9103 = {
 			isa = PBXGroup;
 			children = (
+				A81C7E752F6116DA00BD6D98 /* Assets 2.xcassets */,
+				A81C7E732F61121500BD6D98 /* Assets.xcassets */,
 				CB265B0B5C23FA5B7E6FC1C4 /* ExpiredItem */,
 				CAB35C29F2D18E2EFC20DC59 /* Products */,
 			);
@@ -255,6 +260,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E466AD349A36550F8CC26F7A /* Build configuration list for PBXNativeTarget "ExpiredItem" */;
 			buildPhases = (
+				BB2222BB2222BB2222BB2222 /* Resources */,
 				6240534CEB368439452D931A /* Sources */,
 			);
 			buildRules = (
@@ -275,10 +281,9 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					2F8DB77FBC926ED341D93557 = {
-						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -301,6 +306,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BB2222BB2222BB2222BB2222 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA1111AA1111AA1111AA1111 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6240534CEB368439452D931A /* Sources */ = {
@@ -352,19 +368,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TL5X25TWY6;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = ExpiredItem/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Freshly;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yourname.ExpiredItem;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shushang.freshly;
 				RECIPE_PROXY_TOKEN = 5e1c8f3b2c4e4f4b8c4e4f4b8c4e4f4;
-				RECIPE_PROXY_URL = "http://localhost:3000/recipe";
+				RECIPE_PROXY_URL = "http://45.33.84.43/recipe";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.9;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -375,6 +396,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -406,6 +428,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = TL5X25TWY6;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -431,6 +454,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -462,6 +486,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = TL5X25TWY6;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -494,19 +519,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TL5X25TWY6;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = ExpiredItem/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Freshly;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yourname.ExpiredItem;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shushang.freshly;
 				RECIPE_PROXY_TOKEN = 5e1c8f3b2c4e4f4b8c4e4f4b8c4e4f4;
-				RECIPE_PROXY_URL = "http://localhost:3000/recipe";
+				RECIPE_PROXY_URL = "http://45.33.84.43/recipe";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.9;
 				TARGETED_DEVICE_FAMILY = 1;

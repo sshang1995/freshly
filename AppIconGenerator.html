@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Freshly App Icon Generator</title>
+  <style>
+    body { background: #1a1a2e; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; font-family: -apple-system, sans-serif; gap: 24px; }
+    canvas { border-radius: 22.5%; box-shadow: 0 24px 60px rgba(0,0,0,0.6); }
+    button { background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 14px 32px; border-radius: 50px; font-size: 16px; font-weight: 600; cursor: pointer; letter-spacing: 0.3px; }
+    button:hover { opacity: 0.9; }
+    p { color: rgba(255,255,255,0.5); font-size: 13px; margin: 0; }
+  </style>
+</head>
+<body>
+  <canvas id="icon" width="1024" height="1024" style="width:256px;height:256px;"></canvas>
+  <button onclick="download()">Download 1024×1024 PNG</button>
+  <p>Open in Safari → Download → drag into Xcode's AppIcon asset</p>
+
+  <script>
+    const canvas = document.getElementById('icon');
+    const ctx = canvas.getContext('2d');
+    const W = 1024, H = 1024, CX = W / 2, CY = H / 2;
+
+    // ── Background gradient ───────────────────────────────────────────
+    const bg = ctx.createLinearGradient(0, 0, W, H);
+    bg.addColorStop(0, '#0d6e63');
+    bg.addColorStop(0.5, '#11998e');
+    bg.addColorStop(1, '#22c972');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    // ── Radial glow in center ─────────────────────────────────────────
+    const glow = ctx.createRadialGradient(CX, CY - 40, 0, CX, CY - 40, 480);
+    glow.addColorStop(0, 'rgba(255,255,255,0.12)');
+    glow.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, W, H);
+
+    // ── Leaf shape ────────────────────────────────────────────────────
+    ctx.save();
+    ctx.translate(CX, CY - 20);
+
+    const leafHeight = 580;
+    const leafWidth  = 390;
+    const ty = -leafHeight / 2;  // top tip y
+    const by =  leafHeight / 2;  // bottom tip y
+
+    // Main leaf fill
+    ctx.beginPath();
+    ctx.moveTo(0, ty);
+    // right side
+    ctx.bezierCurveTo( leafWidth * 0.55, ty + leafHeight * 0.18,
+                       leafWidth * 0.50, ty + leafHeight * 0.50,
+                       leafWidth * 0.42, ty + leafHeight * 0.68);
+    ctx.bezierCurveTo( leafWidth * 0.32, ty + leafHeight * 0.88,
+                       leafWidth * 0.14, ty + leafHeight * 0.98,
+                       0, by);
+    // left side (mirror)
+    ctx.bezierCurveTo(-leafWidth * 0.14, ty + leafHeight * 0.98,
+                      -leafWidth * 0.32, ty + leafHeight * 0.88,
+                      -leafWidth * 0.42, ty + leafHeight * 0.68);
+    ctx.bezierCurveTo(-leafWidth * 0.50, ty + leafHeight * 0.50,
+                      -leafWidth * 0.55, ty + leafHeight * 0.18,
+                       0, ty);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(255,255,255,0.95)';
+    ctx.fill();
+
+    // Center vein
+    ctx.beginPath();
+    ctx.moveTo(0, ty + 20);
+    ctx.lineTo(0, by - 20);
+    ctx.strokeStyle = 'rgba(13,110,99,0.22)';
+    ctx.lineWidth = 18;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+
+    // Side veins (left)
+    [0.28, 0.46, 0.62].forEach((t, i) => {
+      const ox = 0, oy = ty + leafHeight * t;
+      const ex = -(leafWidth * (0.30 - i * 0.04)), ey = oy + leafHeight * 0.08;
+      ctx.beginPath();
+      ctx.moveTo(ox, oy);
+      ctx.quadraticCurveTo((ox + ex) / 2 - 20, (oy + ey) / 2, ex, ey);
+      ctx.strokeStyle = 'rgba(13,110,99,0.13)';
+      ctx.lineWidth = 10;
+      ctx.stroke();
+    });
+
+    // Side veins (right, mirror)
+    [0.28, 0.46, 0.62].forEach((t, i) => {
+      const ox = 0, oy = ty + leafHeight * t;
+      const ex =  (leafWidth * (0.30 - i * 0.04)), ey = oy + leafHeight * 0.08;
+      ctx.beginPath();
+      ctx.moveTo(ox, oy);
+      ctx.quadraticCurveTo((ox + ex) / 2 + 20, (oy + ey) / 2, ex, ey);
+      ctx.strokeStyle = 'rgba(13,110,99,0.13)';
+      ctx.lineWidth = 10;
+      ctx.stroke();
+    });
+
+    ctx.restore();
+
+    // ── Stem ─────────────────────────────────────────────────────────
+    ctx.beginPath();
+    ctx.moveTo(CX, CY - 20 + leafHeight / 2);
+    ctx.bezierCurveTo(CX + 18, CY - 20 + leafHeight / 2 + 60,
+                      CX + 8,  CY - 20 + leafHeight / 2 + 110,
+                      CX,      CY - 20 + leafHeight / 2 + 130);
+    ctx.strokeStyle = 'rgba(255,255,255,0.90)';
+    ctx.lineWidth = 28;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+
+    // ── Sparkle dots (top-right) for AI feel ─────────────────────────
+    [[710, 215, 16], [760, 270, 10], [680, 278, 8]].forEach(([x, y, r]) => {
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.75)';
+      ctx.fill();
+    });
+
+    // ── Download ──────────────────────────────────────────────────────
+    function download() {
+      const link = document.createElement('a');
+      link.download = 'AppIcon-1024.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+  </script>
+</body>
+</html>
