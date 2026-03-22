@@ -28,6 +28,20 @@ interface RecipeResponse {
   steps: string[];
 }
 
+interface ReceiptParseRequest {
+  ocrText: string;
+}
+
+interface ReceiptItem {
+  name: string;
+  quantity: string;
+  category: string;
+}
+
+interface ReceiptParseResponse {
+  items: ReceiptItem[];
+}
+
 // ─── Claude client ────────────────────────────────────────────────────────────
 
 const anthropic = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
@@ -80,6 +94,69 @@ The steps array should contain 4–7 clear, concise cooking instructions in orde
   }
 
   return parsed;
+}
+
+async function parseReceiptItems(ocrText: string): Promise<ReceiptItem[]> {
+  const message = await anthropic.messages.create({
+    model: "claude-haiku-4-5-20251001",
+    max_tokens: 1024,
+    system: `You are a grocery receipt parser. Extract only food and beverage items from receipt OCR text. Ignore non-food items (cleaning products, paper goods, cosmetics, medicine, etc.). Always respond with valid JSON only — no markdown, no explanation, just the raw JSON array.`,
+    messages: [
+      {
+        role: "user",
+        content: `Receipt text:
+${ocrText}
+
+Extract every food or beverage item and respond with this exact JSON shape:
+{
+  "items": [
+    { "name": "Human-readable item name", "quantity": "e.g. 2, 500g, 1lb — empty string if not clear", "category": "one of: produce|dairy|meat|bakery|frozen|beverages|condiments|snacks|other" }
+  ]
+}
+
+Rules:
+- Clean up item names (remove price codes, PLU numbers, abbreviations)
+- Only include food/beverage items — skip medicine, cosmetics, household goods
+- If quantity is ambiguous or missing, use empty string
+- Category must be exactly one of the listed values`,
+      },
+    ],
+  });
+
+  const raw = message.content.find((b) => b.type === "text")?.text ?? "";
+  const jsonText = raw.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "").trim();
+
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(jsonText);
+  } catch {
+    throw new Error(`Claude returned non-JSON: ${raw.slice(0, 200)}`);
+  }
+
+  if (
+    typeof parsed !== "object" ||
+    parsed === null ||
+    !Array.isArray((parsed as Record<string, unknown>).items)
+  ) {
+    throw new Error(`Claude returned unexpected shape: ${jsonText.slice(0, 200)}`);
+  }
+
+  const rawItems = (parsed as Record<string, unknown>).items as unknown[];
+  return rawItems
+    .filter(
+      (i): i is ReceiptItem =>
+        typeof i === "object" &&
+        i !== null &&
+        typeof (i as Record<string, unknown>).name === "string" &&
+        typeof (i as Record<string, unknown>).quantity === "string" &&
+        typeof (i as Record<string, unknown>).category === "string"
+    )
+    .map((i) => ({
+      name: i.name.trim(),
+      quantity: i.quantity.trim(),
+      category: i.category.trim().toLowerCase(),
+    }))
+    .filter((i) => i.name.length > 0);
 }
 
 function isRecipeResponse(v: unknown): v is RecipeResponse {
@@ -156,6 +233,28 @@ app.post("/recipe", async (req: Request, res: Response) => {
     const message = err instanceof Error ? err.message : "Unknown error";
     console.error("[recipe] Error:", message);
     res.status(502).json({ error: "Failed to generate recipe", detail: message });
+  }
+});
+
+// Parse-receipt endpoint
+app.post("/parse-receipt", async (req: Request, res: Response) => {
+  const body = req.body as ReceiptParseRequest;
+
+  if (typeof body.ocrText !== "string" || body.ocrText.trim().length === 0) {
+    res.status(400).json({ error: "ocrText must be a non-empty string" });
+    return;
+  }
+
+  // Cap input to avoid excessive token usage
+  const ocrText = body.ocrText.slice(0, 4000);
+
+  try {
+    const items = await parseReceiptItems(ocrText);
+    res.json({ items });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Unknown error";
+    console.error("[parse-receipt] Error:", message);
+    res.status(502).json({ error: "Failed to parse receipt", detail: message });
   }
 });
 
