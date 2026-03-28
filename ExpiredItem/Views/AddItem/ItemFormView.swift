@@ -6,18 +6,18 @@ struct ItemFormView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                formSection(title: "Item Details", icon: "tag.fill", iconColor: Color(hex: "667eea")) {
-                    formField("Name") {
-                        TextField("e.g. Whole Milk", text: $viewModel.name)
+                formSection(title: L("form.section.itemDetails"), icon: "tag.fill", iconColor: Color(hex: "667eea")) {
+                    formField(L("form.field.name")) {
+                        TextField(L("form.field.namePlaceholder"), text: $viewModel.name)
                             .autocorrectionDisabled()
                     }
                     Divider().padding(.leading, 16)
-                    formField("Quantity") {
-                        TextField("Optional", text: $viewModel.quantity)
+                    formField(L("form.field.quantity")) {
+                        TextField(L("form.field.quantityPlaceholder"), text: $viewModel.quantity)
                     }
                 }
 
-                formSection(title: "Category", icon: "square.grid.2x2.fill", iconColor: Color(hex: "764ba2")) {
+                formSection(title: L("form.section.category"), icon: "square.grid.2x2.fill", iconColor: Color(hex: "764ba2")) {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
                             ForEach(Category.allCases) { cat in
@@ -29,10 +29,10 @@ struct ItemFormView: View {
                     }
                 }
 
-                formSection(title: "Location", icon: "mappin.circle.fill", iconColor: Color(hex: "11998e")) {
+                formSection(title: L("form.section.location"), icon: "mappin.circle.fill", iconColor: Color(hex: "11998e")) {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
-                            ForEach([Location.fridge, .freezer, .pantry, .cabinet, .counter, .custom("Custom")], id: \.self) { loc in
+                            ForEach([Location.fridge, .freezer, .pantry, .cabinet, .counter, .custom(L("location.custom"))], id: \.self) { loc in
                                 locationChip(loc)
                             }
                         }
@@ -41,15 +41,15 @@ struct ItemFormView: View {
                     }
                     if case .custom = viewModel.location {
                         Divider().padding(.leading, 16)
-                        formField("Custom Name") {
-                            TextField("e.g. Garage Shelf", text: $viewModel.customLocationName)
+                        formField(L("form.field.customName")) {
+                            TextField(L("form.field.customNamePlaceholder"), text: $viewModel.customLocationName)
                         }
                     }
                 }
 
-                formSection(title: "Expiration Date", icon: "calendar.badge.exclamationmark", iconColor: Color(hex: "FF416C")) {
+                formSection(title: L("form.section.expiration"), icon: "calendar.badge.exclamationmark", iconColor: Color(hex: "FF416C")) {
                     HStack {
-                        Text("Expires on")
+                        Text(L("form.date.expiresOn"))
                             .font(.system(size: 15))
                             .foregroundStyle(.secondary)
                         Spacer()
@@ -62,7 +62,7 @@ struct ItemFormView: View {
                     Divider().padding(.leading, 16)
 
                     Toggle(isOn: $viewModel.hasPurchaseDate) {
-                        Text("Track Purchase Date")
+                        Text(L("form.date.trackPurchase"))
                             .font(.system(size: 15))
                     }
                     .padding(.horizontal, 16)
@@ -72,7 +72,7 @@ struct ItemFormView: View {
                     if viewModel.hasPurchaseDate {
                         Divider().padding(.leading, 16)
                         HStack {
-                            Text("Purchased on")
+                            Text(L("form.date.purchasedOn"))
                                 .font(.system(size: 15))
                                 .foregroundStyle(.secondary)
                             Spacer()
@@ -91,14 +91,15 @@ struct ItemFormView: View {
                     }
                 }
 
-                formSection(title: "Reminder", icon: "bell.fill", iconColor: Color(hex: "F7971E")) {
+                formSection(title: L("form.section.reminder"), icon: "bell.fill", iconColor: Color(hex: "F7971E")) {
                     VStack(spacing: 6) {
                         HStack {
-                            Text("Remind me")
+                            Text(L("form.reminder.remindMe"))
                                 .font(.system(size: 15))
                                 .foregroundStyle(.secondary)
                             Spacer()
-                            Text("\(viewModel.reminderOffsetDays) day\(viewModel.reminderOffsetDays == 1 ? "" : "s") before")
+                            let days = viewModel.reminderOffsetDays
+                            Text(Lf(days == 1 ? "form.reminder.dayBefore" : "form.reminder.daysBefore", days))
                                 .font(.system(size: 15, weight: .semibold))
                                 .foregroundStyle(Color(hex: "667eea"))
                         }
@@ -109,8 +110,8 @@ struct ItemFormView: View {
                     .padding(.vertical, 12)
                 }
 
-                formSection(title: "Notes", icon: "note.text", iconColor: Color(hex: "95A5A6")) {
-                    TextField("Add a note... (optional)", text: $viewModel.notes, axis: .vertical)
+                formSection(title: L("form.section.notes"), icon: "note.text", iconColor: Color(hex: "95A5A6")) {
+                    TextField(L("form.field.notesPlaceholder"), text: $viewModel.notes, axis: .vertical)
                         .lineLimit(3...6)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 12)

@@ -5,16 +5,21 @@ import SwiftData
 struct ExpiredItemApp: App {
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
     @State private var settings = AppSettings.shared
+    @State private var languageManager = LanguageManager.shared
 
     var body: some Scene {
         WindowGroup {
-            if hasCompletedOnboarding {
-                ContentView()
-            } else {
-                OnboardingContainerView()
+            Group {
+                if hasCompletedOnboarding {
+                    ContentView()
+                } else {
+                    OnboardingContainerView()
+                }
             }
+            .id(languageManager.selectedLanguage)
+            .environment(settings)
+            .environment(languageManager)
         }
         .modelContainer(ModelContainerFactory.shared.container)
-        .environment(settings)
     }
 }

@@ -1,0 +1,201 @@
+// Navigation Tabs
+"tab.home" = "Accueil";
+"tab.inventory" = "Inventaire";
+"tab.add" = "Ajouter";
+"tab.settings" = "Réglages";
+
+// Greetings
+"home.greeting.morning" = "Bonjour ☀️";
+"home.greeting.afternoon" = "Bon après-midi 👋";
+"home.greeting.evening" = "Bonsoir 🌙";
+
+// Home - Empty State
+"home.empty.title" = "Rien ici pour l'instant";
+"home.empty.message" = "Ajoutez votre premier article pour\nsuivre les dates d'expiration.";
+"home.empty.button" = "Ajouter le premier article";
+
+// Home - Sections
+"home.section.allItems" = "Tous les articles";
+"home.section.showAll" = "Tout afficher";
+"home.noItemsMessage" = "Rien dans cette catégorie.";
+
+// Home - Recipe
+"home.recipe.title" = "Idée recette IA";
+"home.recipe.refresh" = "Actualiser";
+"home.recipe.generating" = "Génération d'une recette...";
+"home.recipe.noIngredients" = "Aucun ingrédient qui expire bientôt.";
+"home.recipe.tapForRecipe" = "Appuyez pour la recette complète";
+"home.recipe.expiringItems" = "%d articles bientôt expirés";
+"home.recipe.navTitle" = "Recette";
+"home.recipe.ingredients" = "Ingrédients";
+"home.recipe.instructions" = "Instructions";
+"home.recipe.label" = "Idée recette IA";
+"home.recipe.steps" = "%d étapes";
+"home.recipe.ingredientsCount" = "%d ingrédients";
+
+// Item Status
+"status.fresh" = "Frais";
+"status.expiringSoon" = "Bientôt expiré";
+"status.expired" = "Expiré";
+"status.soon" = "Bientôt";
+
+// Categories
+"category.produce" = "Fruits & légumes";
+"category.dairy" = "Produits laitiers";
+"category.meat" = "Viandes";
+"category.bakery" = "Boulangerie";
+"category.frozen" = "Surgelés";
+"category.beverages" = "Boissons";
+"category.condiments" = "Condiments";
+"category.snacks" = "Snacks";
+"category.medicine" = "Médicaments";
+"category.cosmetics" = "Cosmétiques";
+"category.other" = "Autres";
+
+// Locations
+"location.fridge" = "Réfrigérateur";
+"location.freezer" = "Congélateur";
+"location.pantry" = "Garde-manger";
+"location.cabinet" = "Placard";
+"location.counter" = "Plan de travail";
+"location.custom" = "Personnalisé";
+
+// Completion States
+"state.active" = "Actif";
+"state.consumed" = "Consommé";
+"state.discarded" = "Jeté";
+
+// Sort Options
+"sort.expirationDate" = "Date d'expiration";
+"sort.name" = "Nom";
+"sort.category" = "Catégorie";
+"sort.dateAdded" = "Date d'ajout";
+
+// Inventory
+"inventory.searchPlaceholder" = "Rechercher des articles...";
+"inventory.empty.nothingYet" = "Rien ici pour l'instant";
+"inventory.empty.noResults" = "Aucun résultat";
+"inventory.empty.addItems" = "Ajoutez des articles pour suivre les expirations.";
+"inventory.empty.adjustSearch" = "Essayez d'ajuster votre recherche ou filtres.";
+"inventory.empty.addItem" = "Ajouter un article";
+"inventory.action.delete" = "Supprimer";
+"inventory.action.consumed" = "Consommé";
+
+// Filter
+"filter.title" = "Filtrer et trier";
+"filter.category" = "Catégorie";
+"filter.location" = "Emplacement";
+"filter.sortBy" = "Trier par";
+"filter.all" = "Tout";
+"filter.reset" = "Réinitialiser";
+"filter.done" = "Terminé";
+
+// Item Form
+"form.section.itemDetails" = "Détails de l'article";
+"form.section.category" = "Catégorie";
+"form.section.location" = "Emplacement";
+"form.section.expiration" = "Date d'expiration";
+"form.section.reminder" = "Rappel";
+"form.section.notes" = "Notes";
+"form.field.name" = "Nom";
+"form.field.quantity" = "Quantité";
+"form.field.namePlaceholder" = "ex. Lait entier";
+"form.field.quantityPlaceholder" = "Optionnel";
+"form.field.customName" = "Nom personnalisé";
+"form.field.customNamePlaceholder" = "ex. Étagère du garage";
+"form.field.notesPlaceholder" = "Ajouter une note... (optionnel)";
+"form.date.expiresOn" = "Expire le";
+"form.date.purchasedOn" = "Acheté le";
+"form.date.trackPurchase" = "Suivre la date d'achat";
+"form.reminder.remindMe" = "Me rappeler";
+"form.reminder.dayBefore" = "%d jour avant";
+"form.reminder.daysBefore" = "%d jours avant";
+
+// Add Item
+"addItem.title" = "Nouvel article";
+"addItem.scanBarcode" = "Scanner code-barre";
+"addItem.save" = "Enregistrer";
+"addItem.cancel" = "Annuler";
+"addItem.lookingUp" = "Recherche du produit…";
+
+// Edit Item
+"editItem.title" = "Modifier l'article";
+"editItem.save" = "Enregistrer";
+"editItem.cancel" = "Annuler";
+
+// Item Detail
+"detail.expires" = "Expire";
+"detail.daysLeft" = "Jours restants";
+"detail.purchased" = "Acheté";
+"detail.category" = "Catégorie";
+"detail.location" = "Emplacement";
+"detail.quantity" = "Quantité";
+"detail.reminder" = "Rappel";
+"detail.notes" = "Notes";
+"detail.edit" = "Modifier";
+"detail.delete" = "Supprimer l'article";
+"detail.consumed" = "Consommé";
+"detail.discard" = "Jeter";
+"detail.deleteDialogTitle" = "Supprimer \"%@\" ?";
+"detail.deleteConfirm" = "Cette action est irréversible.";
+"detail.cancel" = "Annuler";
+"detail.today" = "Aujourd'hui";
+"detail.tomorrow" = "Demain";
+"detail.daysAgo" = "il y a %d j";
+"detail.daysLeft.format" = "%d jours";
+"detail.dayBefore" = "%d jour avant";
+"detail.daysBefore" = "%d jours avant";
+
+// Settings
+"settings.version" = "Version 1.0.0";
+"settings.notifications" = "Notifications";
+"settings.notifications.off" = "Notifications désactivées";
+"settings.notifications.tapEnable" = "Appuyez sur Activer pour recevoir des rappels";
+"settings.notifications.enable" = "Activer";
+"settings.notifications.subtitle" = "Recevez des rappels avant expiration";
+"settings.reminder.default" = "Rappel par défaut";
+"settings.reminder.dBefore" = "%d j avant";
+"settings.dailySummary" = "Résumé quotidien";
+"settings.dailySummary.subtitle" = "Un résumé quotidien de vos articles";
+"settings.summaryTime" = "Heure du résumé";
+"settings.defaults" = "Paramètres par défaut";
+"settings.defaults.category" = "Catégorie";
+"settings.defaults.location" = "Emplacement";
+"settings.language" = "Langue";
+"settings.language.section" = "Langue";
+"settings.language.choose" = "Choisir la langue";
+
+// Receipt Scanning
+"receipt.scan.button" = "Scanner reçu";
+"receipt.scanner.instruction" = "Pointez vers le reçu";
+"receipt.review.title" = "Articles du reçu";
+"receipt.review.processing" = "Lecture du reçu...";
+"receipt.review.addItems" = "Ajouter %d articles";
+"receipt.review.noItems" = "Aucun aliment détecté";
+"receipt.review.cancel" = "Annuler";
+"receipt.review.retry" = "Réessayer";
+"receipt.review.quantity" = "Qté";
+"receipt.review.expiry" = "Expire";
+
+// Onboarding
+"onboarding.welcome.title" = "Bienvenue sur Freshly";
+"onboarding.welcome.subtitle" = "Ne laissez plus les aliments expirer. Suivez vos articles et soyez rappelé avant qu'ils périment.";
+"onboarding.feature.track" = "Suivre les articles";
+"onboarding.feature.track.desc" = "Ajoutez des articles avec des dates d'expiration";
+"onboarding.feature.remind" = "Être rappelé";
+"onboarding.feature.remind.desc" = "Notifications avant expiration";
+"onboarding.feature.organize" = "Rester organisé";
+"onboarding.feature.organize.desc" = "Parcourez par statut et catégorie";
+"onboarding.notif.title" = "Anticipez l'expiration";
+"onboarding.notif.subtitle" = "Activez les notifications pour recevoir des rappels avant que vos articles expirent.";
+"onboarding.notif.example1.title" = "Bientôt expiré";
+"onboarding.notif.example1.body" = "Le lait expire dans 3 jours";
+"onboarding.notif.example2.title" = "Expire aujourd'hui";
+"onboarding.notif.example2.body" = "Le yaourt expire aujourd'hui !";
+"onboarding.reminder.title" = "Configurer votre rappel";
+"onboarding.reminder.subtitle" = "Combien de jours avant expiration souhaitez-vous être rappelé par défaut ?";
+"onboarding.reminder.customizeNote" = "Vous pouvez personnaliser cela par article lors de l'ajout.";
+"onboarding.reminder.daysBefore" = "%d jour%@ avant expiration";
+"onboarding.back" = "Retour";
+"onboarding.next" = "Suivant";
+"onboarding.getStarted" = "Commencer";

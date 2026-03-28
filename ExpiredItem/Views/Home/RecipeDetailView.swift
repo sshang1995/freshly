@@ -19,7 +19,7 @@ struct RecipeDetailView: View {
             }
         }
         .background(Color(.systemGroupedBackground))
-        .navigationTitle("Recipe")
+        .navigationTitle(L("home.recipe.navTitle"))
         .navigationBarTitleDisplayMode(.inline)
     }
 
@@ -35,7 +35,7 @@ struct RecipeDetailView: View {
             .ignoresSafeArea(edges: .top)
 
             VStack(alignment: .leading, spacing: 8) {
-                Label("AI Recipe Idea", systemImage: "sparkles")
+                Label(L("home.recipe.label"), systemImage: "sparkles")
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundStyle(.white.opacity(0.85))
 
@@ -50,8 +50,8 @@ struct RecipeDetailView: View {
 
                 HStack(spacing: 14) {
                     Label(recipe.timeText, systemImage: "clock.fill")
-                    Label("\(recipe.ingredients.count) ingredients", systemImage: "carrot.fill")
-                    Label("\(recipe.steps.count) steps", systemImage: "list.number")
+                    Label(Lf("home.recipe.ingredientsCount", recipe.ingredients.count), systemImage: "carrot.fill")
+                    Label(Lf("home.recipe.steps", recipe.steps.count), systemImage: "list.number")
                 }
                 .font(.system(size: 13, weight: .semibold))
                 .foregroundStyle(.white.opacity(0.9))
@@ -66,7 +66,7 @@ struct RecipeDetailView: View {
     // MARK: - Ingredients
 
     private var ingredientsCard: some View {
-        sectionCard(title: "Ingredients", icon: "carrot.fill", iconColor: Color(hex: "ff9966")) {
+        sectionCard(title: L("home.recipe.ingredients"), icon: "carrot.fill", iconColor: Color(hex: "ff9966")) {
             ForEach(Array(recipe.ingredients.enumerated()), id: \.offset) { index, ingredient in
                 HStack(spacing: 14) {
                     ZStack {
@@ -95,7 +95,7 @@ struct RecipeDetailView: View {
     // MARK: - Steps
 
     private var stepsCard: some View {
-        sectionCard(title: "Instructions", icon: "list.number", iconColor: Color(hex: "667eea")) {
+        sectionCard(title: L("home.recipe.instructions"), icon: "list.number", iconColor: Color(hex: "667eea")) {
             ForEach(Array(recipe.steps.enumerated()), id: \.offset) { index, step in
                 HStack(alignment: .top, spacing: 14) {
                     ZStack {

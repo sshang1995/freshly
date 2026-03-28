@@ -19,16 +19,16 @@ struct AddItemView: View {
                 ItemFormView(viewModel: viewModel)
 
                 if isLookingUp {
-                    lookupBanner(text: "Looking up product…", isError: false)
+                    lookupBanner(text: L("addItem.lookingUp"), isError: false)
                 } else if let error = lookupError {
                     lookupBanner(text: error, isError: true)
                 }
             }
-            .navigationTitle("New Item")
+            .navigationTitle(L("addItem.title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
+                    Button(L("addItem.cancel")) { dismiss() }
                         .foregroundStyle(.secondary)
                 }
                 ToolbarItem(placement: .principal) {
@@ -36,7 +36,7 @@ struct AddItemView: View {
                         lookupError = nil
                         showScanner = true
                     } label: {
-                        Label("Scan Barcode", systemImage: "barcode.viewfinder")
+                        Label(L("addItem.scanBarcode"), systemImage: "barcode.viewfinder")
                             .font(.system(size: 13, weight: .semibold))
                             .foregroundStyle(Color(hex: "667eea"))
                     }
@@ -53,7 +53,7 @@ struct AddItemView: View {
                         if isSaving {
                             ProgressView().tint(.white)
                         } else {
-                            Text("Save")
+                            Text(L("addItem.save"))
                                 .fontWeight(.semibold)
                                 .foregroundStyle(Color(hex: "667eea"))
                         }
@@ -69,8 +69,6 @@ struct AddItemView: View {
         }
     }
 
-    // MARK: - Barcode handling
-
     private func handleScannedBarcode(_ barcode: String) async {
         isLookingUp = true
         lookupError = nil
@@ -82,8 +80,6 @@ struct AddItemView: View {
         }
         isLookingUp = false
     }
-
-    // MARK: - Banner
 
     private func lookupBanner(text: String, isError: Bool) -> some View {
         HStack(spacing: 10) {

@@ -15,12 +15,12 @@ struct OnboardingReminderView: View {
                     .padding(.top, 32)
 
                 VStack(spacing: 10) {
-                    Text("Set Your Default Reminder")
+                    Text(L("onboarding.reminder.title"))
                         .font(.title)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
 
-                    Text("How many days before expiry would you like to be reminded by default?")
+                    Text(L("onboarding.reminder.subtitle"))
                         .font(.body)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
@@ -29,14 +29,15 @@ struct OnboardingReminderView: View {
                 }
 
                 VStack(spacing: 16) {
-                    Text("\(defaultReminderDays) day\(defaultReminderDays == 1 ? "" : "s") before expiry")
+                    let days = defaultReminderDays
+                    Text(Lf(days == 1 ? "form.reminder.dayBefore" : "form.reminder.daysBefore", days))
                         .font(.title2)
                         .fontWeight(.semibold)
 
                     Stepper("", value: $defaultReminderDays, in: 1...14)
                         .labelsHidden()
 
-                    Text("You can customize this per-item when adding it.")
+                    Text(L("onboarding.reminder.customizeNote"))
                         .font(.caption)
                         .foregroundStyle(.tertiary)
                         .multilineTextAlignment(.center)

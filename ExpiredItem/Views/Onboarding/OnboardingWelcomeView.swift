@@ -13,12 +13,12 @@ struct OnboardingWelcomeView: View {
                     .padding(.top, 32)
 
                 VStack(spacing: 10) {
-                    Text("Welcome to Freshly")
+                    Text(L("onboarding.welcome.title"))
                         .font(.title)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
 
-                    Text("Never let food expire again. Track your items and get reminded before they go bad.")
+                    Text(L("onboarding.welcome.subtitle"))
                         .font(.body)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
@@ -27,9 +27,15 @@ struct OnboardingWelcomeView: View {
                 }
 
                 VStack(spacing: 14) {
-                    featureRow(icon: "plus.circle.fill", color: .blue, title: "Track Items", description: "Add items with expiration dates")
-                    featureRow(icon: "bell.fill", color: .orange, title: "Get Reminded", description: "Notifications before items expire")
-                    featureRow(icon: "chart.bar.fill", color: .green, title: "Stay Organized", description: "Browse by status and category")
+                    featureRow(icon: "plus.circle.fill", color: .blue,
+                               title: L("onboarding.feature.track"),
+                               description: L("onboarding.feature.track.desc"))
+                    featureRow(icon: "bell.fill", color: .orange,
+                               title: L("onboarding.feature.remind"),
+                               description: L("onboarding.feature.remind.desc"))
+                    featureRow(icon: "chart.bar.fill", color: .green,
+                               title: L("onboarding.feature.organize"),
+                               description: L("onboarding.feature.organize.desc"))
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 32)

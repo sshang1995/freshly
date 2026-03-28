@@ -1,0 +1,201 @@
+// Navigation Tabs
+"tab.home" = "Home";
+"tab.inventory" = "Inventory";
+"tab.add" = "Add";
+"tab.settings" = "Settings";
+
+// Greetings
+"home.greeting.morning" = "Good morning ☀️";
+"home.greeting.afternoon" = "Good afternoon 👋";
+"home.greeting.evening" = "Good evening 🌙";
+
+// Home - Empty State
+"home.empty.title" = "Nothing here yet";
+"home.empty.message" = "Add your first item to start\ntracking expirations.";
+"home.empty.button" = "Add First Item";
+
+// Home - Sections
+"home.section.allItems" = "All Items";
+"home.section.showAll" = "Show all";
+"home.noItemsMessage" = "Nothing in this category right now.";
+
+// Home - Recipe
+"home.recipe.title" = "AI Recipe Idea";
+"home.recipe.refresh" = "Refresh";
+"home.recipe.generating" = "Generating recipe recommendation...";
+"home.recipe.noIngredients" = "No eligible expiring ingredients yet.";
+"home.recipe.tapForRecipe" = "Tap for full recipe";
+"home.recipe.expiringItems" = "%d expiring items";
+"home.recipe.navTitle" = "Recipe";
+"home.recipe.ingredients" = "Ingredients";
+"home.recipe.instructions" = "Instructions";
+"home.recipe.label" = "AI Recipe Idea";
+"home.recipe.steps" = "%d steps";
+"home.recipe.ingredientsCount" = "%d ingredients";
+
+// Item Status
+"status.fresh" = "Fresh";
+"status.expiringSoon" = "Expiring Soon";
+"status.expired" = "Expired";
+"status.soon" = "Soon";
+
+// Categories
+"category.produce" = "Produce";
+"category.dairy" = "Dairy";
+"category.meat" = "Meat";
+"category.bakery" = "Bakery";
+"category.frozen" = "Frozen";
+"category.beverages" = "Beverages";
+"category.condiments" = "Condiments";
+"category.snacks" = "Snacks";
+"category.medicine" = "Medicine";
+"category.cosmetics" = "Cosmetics";
+"category.other" = "Other";
+
+// Locations
+"location.fridge" = "Fridge";
+"location.freezer" = "Freezer";
+"location.pantry" = "Pantry";
+"location.cabinet" = "Cabinet";
+"location.counter" = "Counter";
+"location.custom" = "Custom";
+
+// Completion States
+"state.active" = "Active";
+"state.consumed" = "Consumed";
+"state.discarded" = "Discarded";
+
+// Sort Options
+"sort.expirationDate" = "Expiration Date";
+"sort.name" = "Name";
+"sort.category" = "Category";
+"sort.dateAdded" = "Date Added";
+
+// Inventory
+"inventory.searchPlaceholder" = "Search items...";
+"inventory.empty.nothingYet" = "Nothing here yet";
+"inventory.empty.noResults" = "No Results";
+"inventory.empty.addItems" = "Add items to start tracking expirations.";
+"inventory.empty.adjustSearch" = "Try adjusting your search or filters.";
+"inventory.empty.addItem" = "Add Item";
+"inventory.action.delete" = "Delete";
+"inventory.action.consumed" = "Consumed";
+
+// Filter
+"filter.title" = "Filter & Sort";
+"filter.category" = "Category";
+"filter.location" = "Location";
+"filter.sortBy" = "Sort By";
+"filter.all" = "All";
+"filter.reset" = "Reset";
+"filter.done" = "Done";
+
+// Item Form
+"form.section.itemDetails" = "Item Details";
+"form.section.category" = "Category";
+"form.section.location" = "Location";
+"form.section.expiration" = "Expiration Date";
+"form.section.reminder" = "Reminder";
+"form.section.notes" = "Notes";
+"form.field.name" = "Name";
+"form.field.quantity" = "Quantity";
+"form.field.namePlaceholder" = "e.g. Whole Milk";
+"form.field.quantityPlaceholder" = "Optional";
+"form.field.customName" = "Custom Name";
+"form.field.customNamePlaceholder" = "e.g. Garage Shelf";
+"form.field.notesPlaceholder" = "Add a note... (optional)";
+"form.date.expiresOn" = "Expires on";
+"form.date.purchasedOn" = "Purchased on";
+"form.date.trackPurchase" = "Track Purchase Date";
+"form.reminder.remindMe" = "Remind me";
+"form.reminder.dayBefore" = "%d day before";
+"form.reminder.daysBefore" = "%d days before";
+
+// Add Item
+"addItem.title" = "New Item";
+"addItem.scanBarcode" = "Scan Barcode";
+"addItem.save" = "Save";
+"addItem.cancel" = "Cancel";
+"addItem.lookingUp" = "Looking up product…";
+
+// Edit Item
+"editItem.title" = "Edit Item";
+"editItem.save" = "Save";
+"editItem.cancel" = "Cancel";
+
+// Item Detail
+"detail.expires" = "Expires";
+"detail.daysLeft" = "Days Left";
+"detail.purchased" = "Purchased";
+"detail.category" = "Category";
+"detail.location" = "Location";
+"detail.quantity" = "Quantity";
+"detail.reminder" = "Reminder";
+"detail.notes" = "Notes";
+"detail.edit" = "Edit";
+"detail.delete" = "Delete Item";
+"detail.consumed" = "Consumed";
+"detail.discard" = "Discard";
+"detail.deleteDialogTitle" = "Delete \"%@\"?";
+"detail.deleteConfirm" = "This action cannot be undone.";
+"detail.cancel" = "Cancel";
+"detail.today" = "Today";
+"detail.tomorrow" = "Tomorrow";
+"detail.daysAgo" = "%dd ago";
+"detail.daysLeft.format" = "%d days";
+"detail.dayBefore" = "%d day before";
+"detail.daysBefore" = "%d days before";
+
+// Settings
+"settings.version" = "Version 1.0.0";
+"settings.notifications" = "Notifications";
+"settings.notifications.off" = "Notifications are off";
+"settings.notifications.tapEnable" = "Tap Enable to get reminders";
+"settings.notifications.enable" = "Enable";
+"settings.notifications.subtitle" = "Get reminders before items expire";
+"settings.reminder.default" = "Default Reminder";
+"settings.reminder.dBefore" = "%dd before";
+"settings.dailySummary" = "Daily Summary";
+"settings.dailySummary.subtitle" = "A daily digest of your items";
+"settings.summaryTime" = "Summary Time";
+"settings.defaults" = "Item Defaults";
+"settings.defaults.category" = "Category";
+"settings.defaults.location" = "Location";
+"settings.language" = "Language";
+"settings.language.section" = "Language";
+"settings.language.choose" = "Choose Language";
+
+// Receipt Scanning
+"receipt.scan.button" = "Scan Receipt";
+"receipt.scanner.instruction" = "Point camera at receipt";
+"receipt.review.title" = "Receipt Items";
+"receipt.review.processing" = "Reading receipt...";
+"receipt.review.addItems" = "Add %d Items";
+"receipt.review.noItems" = "No food items detected";
+"receipt.review.cancel" = "Cancel";
+"receipt.review.retry" = "Try Again";
+"receipt.review.quantity" = "Qty";
+"receipt.review.expiry" = "Expires";
+
+// Onboarding
+"onboarding.welcome.title" = "Welcome to Freshly";
+"onboarding.welcome.subtitle" = "Never let food expire again. Track your items and get reminded before they go bad.";
+"onboarding.feature.track" = "Track Items";
+"onboarding.feature.track.desc" = "Add items with expiration dates";
+"onboarding.feature.remind" = "Get Reminded";
+"onboarding.feature.remind.desc" = "Notifications before items expire";
+"onboarding.feature.organize" = "Stay Organized";
+"onboarding.feature.organize.desc" = "Browse by status and category";
+"onboarding.notif.title" = "Stay Ahead of Expiry";
+"onboarding.notif.subtitle" = "Enable notifications to get timely reminders before your items expire.";
+"onboarding.notif.example1.title" = "Expiring Soon";
+"onboarding.notif.example1.body" = "Milk expires in 3 days";
+"onboarding.notif.example2.title" = "Expires Today";
+"onboarding.notif.example2.body" = "Yogurt expires today!";
+"onboarding.reminder.title" = "Set Your Default Reminder";
+"onboarding.reminder.subtitle" = "How many days before expiry would you like to be reminded by default?";
+"onboarding.reminder.customizeNote" = "You can customize this per-item when adding it.";
+"onboarding.reminder.daysBefore" = "%d day%@ before expiry";
+"onboarding.back" = "Back";
+"onboarding.next" = "Next";
+"onboarding.getStarted" = "Get Started";

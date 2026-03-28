@@ -15,12 +15,12 @@ struct OnboardingNotifView: View {
                     .padding(.top, 32)
 
                 VStack(spacing: 10) {
-                    Text("Stay Ahead of Expiry")
+                    Text(L("onboarding.notif.title"))
                         .font(.title)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
 
-                    Text("Enable notifications to get timely reminders before your items expire.")
+                    Text(L("onboarding.notif.subtitle"))
                         .font(.body)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
@@ -29,8 +29,16 @@ struct OnboardingNotifView: View {
                 }
 
                 VStack(spacing: 12) {
-                    notifExample(icon: "bell.fill", color: .orange, title: "Expiring Soon", body: "Milk expires in 3 days")
-                    notifExample(icon: "exclamationmark.triangle.fill", color: .red, title: "Expires Today", body: "Yogurt expires today!")
+                    notifExample(
+                        icon: "bell.fill", color: .orange,
+                        title: L("onboarding.notif.example1.title"),
+                        body: L("onboarding.notif.example1.body")
+                    )
+                    notifExample(
+                        icon: "exclamationmark.triangle.fill", color: .red,
+                        title: L("onboarding.notif.example2.title"),
+                        body: L("onboarding.notif.example2.body")
+                    )
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 32)

@@ -3,10 +3,14 @@ import SwiftData
 
 struct HomeView: View {
     @Query(sort: \Item.expirationDate) private var items: [Item]
+    @Environment(\.modelContext) private var context
     @State private var viewModel = HomeViewModel()
     @State private var selectedStatus: ItemStatus? = nil
     @State private var showAddSheet = false
     @State private var selectedRecipe: RecipeRecommendation? = nil
+    @State private var showReceiptScanner = false
+    @State private var scannedReceiptImage: UIImage? = nil
+    @State private var showReceiptReview = false
 
     var body: some View {
         NavigationStack {
@@ -40,6 +44,24 @@ struct HomeView: View {
                     RecipeDetailView(recipe: recipe)
                 }
             }
+            .sheet(isPresented: $showReceiptScanner, onDismiss: {
+                if scannedReceiptImage != nil {
+                    showReceiptReview = true
+                }
+            }) {
+                ReceiptScannerView(
+                    onScan: { image in
+                        scannedReceiptImage = image
+                        showReceiptScanner = false
+                    },
+                    onCancel: { showReceiptScanner = false }
+                )
+            }
+            .sheet(isPresented: $showReceiptReview) {
+                if let image = scannedReceiptImage {
+                    ReceiptReviewView(image: image)
+                }
+            }
             .onChange(of: items) { _, newItems in
                 viewModel.update(items: newItems)
             }
@@ -61,24 +83,45 @@ struct HomeView: View {
                     .foregroundStyle(.primary)
             }
             Spacer()
-            Button {
-                showAddSheet = true
-            } label: {
-                ZStack {
-                    Circle()
-                        .fill(
-                            LinearGradient(
-                                colors: [Color(hex: "667eea"), Color(hex: "764ba2")],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
+            HStack(spacing: 10) {
+                Button {
+                    showReceiptScanner = true
+                } label: {
+                    ZStack {
+                        Circle()
+                            .fill(
+                                LinearGradient(
+                                    colors: [Color(hex: "667eea"), Color(hex: "764ba2")],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
                             )
-                        )
-                        .frame(width: 44, height: 44)
-                    Image(systemName: "plus")
-                        .font(.system(size: 18, weight: .bold))
-                        .foregroundStyle(.white)
+                            .frame(width: 44, height: 44)
+                        Image(systemName: "doc.text.viewfinder")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundStyle(.white)
+                    }
+                    .shadow(color: Color(hex: "667eea").opacity(0.4), radius: 8, y: 3)
                 }
-                .shadow(color: Color(hex: "667eea").opacity(0.4), radius: 8, y: 3)
+                Button {
+                    showAddSheet = true
+                } label: {
+                    ZStack {
+                        Circle()
+                            .fill(
+                                LinearGradient(
+                                    colors: [Color(hex: "667eea"), Color(hex: "764ba2")],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
+                            .frame(width: 44, height: 44)
+                        Image(systemName: "plus")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundStyle(.white)
+                    }
+                    .shadow(color: Color(hex: "667eea").opacity(0.4), radius: 8, y: 3)
+                }
             }
         }
     }
@@ -113,7 +156,7 @@ struct HomeView: View {
         if viewModel.shouldShowRecipeSection {
             VStack(alignment: .leading, spacing: 14) {
                 HStack {
-                    Label("AI Recipe Idea", systemImage: "sparkles")
+                    Label(L("home.recipe.title"), systemImage: "sparkles")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundStyle(.white)
                     Spacer()
@@ -131,7 +174,7 @@ struct HomeView: View {
                                 .background(.white.opacity(0.18))
                                 .clipShape(Capsule())
                         } else {
-                            Label("Refresh", systemImage: "arrow.clockwise")
+                            Label(L("home.recipe.refresh"), systemImage: "arrow.clockwise")
                                 .font(.system(size: 12, weight: .semibold))
                                 .foregroundStyle(.white.opacity(0.95))
                                 .padding(.horizontal, 10)
@@ -157,12 +200,12 @@ struct HomeView: View {
                                 .foregroundStyle(.white.opacity(0.92))
                             HStack(spacing: 8) {
                                 Label(recommendation.timeText, systemImage: "clock.fill")
-                                Label("\(recommendation.ingredients.count) expiring items", systemImage: "tray.full.fill")
+                                Label(Lf("home.recipe.expiringItems", recommendation.ingredients.count), systemImage: "tray.full.fill")
                             }
                             .font(.system(size: 12, weight: .semibold))
                             .foregroundStyle(.white.opacity(0.9))
 
-                            Label("Tap for full recipe", systemImage: "chevron.right")
+                            Label(L("home.recipe.tapForRecipe"), systemImage: "chevron.right")
                                 .font(.system(size: 11, weight: .semibold))
                                 .foregroundStyle(.white.opacity(0.7))
                                 .padding(.top, 2)
@@ -171,7 +214,7 @@ struct HomeView: View {
                     }
                     .buttonStyle(.plain)
                 } else if viewModel.isLoadingRecommendation {
-                    Text("Generating recipe recommendation...")
+                    Text(L("home.recipe.generating"))
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundStyle(.white.opacity(0.95))
                 } else if let errorMessage = viewModel.recommendationErrorMessage {
@@ -179,7 +222,7 @@ struct HomeView: View {
                         .font(.system(size: 13, weight: .medium))
                         .foregroundStyle(.white.opacity(0.95))
                 } else {
-                    Text("No eligible expiring ingredients yet.")
+                    Text(L("home.recipe.noIngredients"))
                         .font(.system(size: 13, weight: .medium))
                         .foregroundStyle(.white.opacity(0.95))
                 }
@@ -209,8 +252,8 @@ struct HomeView: View {
             } else {
                 EmptyStateView(
                     icon: selectedStatus?.icon ?? "tray",
-                    title: "No \(selectedStatus?.displayName ?? "") Items",
-                    message: "Nothing in this category right now."
+                    title: L("home.empty.title"),
+                    message: L("home.noItemsMessage")
                 )
                 .frame(minHeight: 200)
             }
@@ -222,7 +265,7 @@ struct HomeView: View {
                         .foregroundStyle(.primary)
                     Spacer()
                     if selectedStatus != nil {
-                        Button("Show all") {
+                        Button(L("home.section.showAll")) {
                             withAnimation { selectedStatus = nil }
                         }
                         .font(.system(size: 13, weight: .medium))
@@ -232,10 +275,11 @@ struct HomeView: View {
 
                 LazyVStack(spacing: 10) {
                     ForEach(displayItems) { item in
-                        NavigationLink(destination: ItemDetailView(item: item)) {
-                            ItemRowView(item: item)
-                        }
-                        .buttonStyle(.plain)
+                        SwipeableItemRow(
+                            item: item,
+                            onDelete: { deleteItem(item) },
+                            onConsume: item.completionState == .active ? { markConsumed(item) } : nil
+                        )
                     }
                 }
             }
@@ -264,9 +308,9 @@ struct HomeView: View {
             }
 
             VStack(spacing: 8) {
-                Text("Nothing here yet")
+                Text(L("home.empty.title"))
                     .font(.system(size: 20, weight: .bold, design: .rounded))
-                Text("Add your first item to start\ntracking expirations.")
+                Text(L("home.empty.message"))
                     .font(.system(size: 14))
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
@@ -278,7 +322,7 @@ struct HomeView: View {
                 HStack(spacing: 8) {
                     Image(systemName: "plus")
                         .font(.system(size: 14, weight: .bold))
-                    Text("Add First Item")
+                    Text(L("home.empty.button"))
                         .font(.system(size: 15, weight: .semibold))
                 }
                 .foregroundStyle(.white)
@@ -298,6 +342,16 @@ struct HomeView: View {
         .padding(.vertical, 40)
     }
 
+    // MARK: - Actions
+
+    private func deleteItem(_ item: Item) {
+        ItemFormViewModel(item: item).delete(item: item, context: context)
+    }
+
+    private func markConsumed(_ item: Item) {
+        ItemFormViewModel(item: item).markComplete(item: item, state: .consumed, context: context)
+    }
+
     // MARK: - Helpers
     private var filteredItems: [Item] {
         switch selectedStatus {
@@ -310,19 +364,19 @@ struct HomeView: View {
 
     private var sectionTitle: String {
         switch selectedStatus {
-        case .expired: return "Expired"
-        case .expiringSoon: return "Expiring Soon"
-        case .fresh: return "Fresh"
-        case nil: return "All Items"
+        case .expired: return L("status.expired")
+        case .expiringSoon: return L("status.expiringSoon")
+        case .fresh: return L("status.fresh")
+        case nil: return L("home.section.allItems")
         }
     }
 
     private var greeting: String {
         let hour = Calendar.current.component(.hour, from: Date())
         switch hour {
-        case 0..<12: return "Good morning ☀️"
-        case 12..<17: return "Good afternoon 👋"
-        default: return "Good evening 🌙"
+        case 0..<12: return L("home.greeting.morning")
+        case 12..<17: return L("home.greeting.afternoon")
+        default: return L("home.greeting.evening")
         }
     }
 }

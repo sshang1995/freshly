@@ -23,9 +23,7 @@ struct OnboardingContainerView: View {
             .tabViewStyle(.page(indexDisplayMode: .never))
             .animation(.easeInOut, value: currentPage)
 
-            // Page indicator + buttons
             VStack(spacing: 20) {
-                // Page dots
                 HStack(spacing: 8) {
                     ForEach(0..<totalPages, id: \.self) { index in
                         Circle()
@@ -37,14 +35,14 @@ struct OnboardingContainerView: View {
 
                 HStack(spacing: 16) {
                     if currentPage > 0 {
-                        Button("Back") {
+                        Button(L("onboarding.back")) {
                             withAnimation { currentPage -= 1 }
                         }
                         .buttonStyle(.bordered)
                         .frame(maxWidth: .infinity)
                     }
 
-                    Button(currentPage < totalPages - 1 ? "Next" : "Get Started") {
+                    Button(currentPage < totalPages - 1 ? L("onboarding.next") : L("onboarding.getStarted")) {
                         if currentPage < totalPages - 1 {
                             if currentPage == 1 {
                                 Task { await requestNotifications() }

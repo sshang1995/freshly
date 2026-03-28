@@ -16,19 +16,7 @@ enum Category: String, CaseIterable, Identifiable {
     var id: String { rawValue }
 
     var displayName: String {
-        switch self {
-        case .produce: return "Produce"
-        case .dairy: return "Dairy"
-        case .meat: return "Meat"
-        case .bakery: return "Bakery"
-        case .frozen: return "Frozen"
-        case .beverages: return "Beverages"
-        case .condiments: return "Condiments"
-        case .snacks: return "Snacks"
-        case .medicine: return "Medicine"
-        case .cosmetics: return "Cosmetics"
-        case .other: return "Other"
-        }
+        L("category.\(rawValue)")
     }
 
     var icon: String {
@@ -71,12 +59,12 @@ enum Location: Equatable, Hashable {
 
     var displayName: String {
         switch self {
-        case .fridge: return "Fridge"
-        case .freezer: return "Freezer"
-        case .pantry: return "Pantry"
-        case .cabinet: return "Cabinet"
-        case .counter: return "Counter"
-        case .custom(let name): return name.isEmpty ? "Custom" : name
+        case .fridge: return L("location.fridge")
+        case .freezer: return L("location.freezer")
+        case .pantry: return L("location.pantry")
+        case .cabinet: return L("location.cabinet")
+        case .counter: return L("location.counter")
+        case .custom(let name): return name.isEmpty ? L("location.custom") : name
         }
     }
 
@@ -110,11 +98,7 @@ enum CompletionState: String, CaseIterable {
     case discarded = "discarded"
 
     var displayName: String {
-        switch self {
-        case .active: return "Active"
-        case .consumed: return "Consumed"
-        case .discarded: return "Discarded"
-        }
+        L("state.\(rawValue)")
     }
 }
 
@@ -125,17 +109,17 @@ enum ItemStatus {
 
     var displayName: String {
         switch self {
-        case .fresh: return "Fresh"
-        case .expiringSoon: return "Expiring Soon"
-        case .expired: return "Expired"
+        case .fresh: return L("status.fresh")
+        case .expiringSoon: return L("status.expiringSoon")
+        case .expired: return L("status.expired")
         }
     }
 
     var cardLabel: String {
         switch self {
-        case .fresh: return "Fresh"
-        case .expiringSoon: return "Soon"
-        case .expired: return "Expired"
+        case .fresh: return L("status.fresh")
+        case .expiringSoon: return L("status.soon")
+        case .expired: return L("status.expired")
         }
     }
 

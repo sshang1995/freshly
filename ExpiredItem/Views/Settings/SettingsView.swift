@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(AppSettings.self) private var settings
+    @Environment(LanguageManager.self) private var languageManager
     @State private var settingsVM = SettingsViewModel()
 
     // @AppStorage directly so SwiftUI tracks changes and re-renders
@@ -31,6 +32,7 @@ struct SettingsView: View {
                 }
 
                 defaultsSection
+                languageSection
             }
             .padding(.horizontal, 20)
             .padding(.bottom, 40)
@@ -57,7 +59,7 @@ struct SettingsView: View {
 
             Text("Freshly")
                 .font(.system(size: 24, weight: .black, design: .rounded))
-            Text("Version 1.0.0")
+            Text(L("settings.version"))
                 .font(.system(size: 13))
                 .foregroundStyle(.secondary)
         }
@@ -68,19 +70,19 @@ struct SettingsView: View {
 
     // MARK: - Notifications Off Banner
     private var notificationsBanner: some View {
-        sectionCard(title: "Notifications", icon: "bell.slash.fill", iconColor: .orange) {
+        sectionCard(title: L("settings.notifications"), icon: "bell.slash.fill", iconColor: .orange) {
             HStack(spacing: 14) {
                 iconCircle("bell.slash.fill", color: .orange)
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Notifications are off")
+                    Text(L("settings.notifications.off"))
                         .font(.system(size: 15, weight: .semibold))
                         .lineLimit(1)
-                    Text("Tap Enable to get reminders")
+                    Text(L("settings.notifications.tapEnable"))
                         .font(.system(size: 12))
                         .foregroundStyle(.secondary)
                 }
                 Spacer(minLength: 8)
-                Button("Enable") {
+                Button(L("settings.notifications.enable")) {
                     Task { await settingsVM.requestPermission() }
                 }
                 .font(.system(size: 13, weight: .semibold))
@@ -99,10 +101,10 @@ struct SettingsView: View {
 
     // MARK: - Notifications Section
     private var notificationsSection: some View {
-        sectionCard(title: "Notifications", icon: "bell.fill", iconColor: .orange) {
+        sectionCard(title: L("settings.notifications"), icon: "bell.fill", iconColor: .orange) {
             toggleRow(
-                label: "Notifications",
-                subtitle: "Get reminders before items expire",
+                label: L("settings.notifications"),
+                subtitle: L("settings.notifications.subtitle"),
                 icon: "bell.badge.fill",
                 iconColor: .orange,
                 isOn: $notificationsEnabled
@@ -111,8 +113,8 @@ struct SettingsView: View {
             if notificationsEnabled {
                 rowDivider()
                 stepperRow(
-                    label: "Default Reminder",
-                    valueText: "\(defaultReminderDays)d before",
+                    label: L("settings.reminder.default"),
+                    valueText: Lf("settings.reminder.dBefore", defaultReminderDays),
                     icon: "clock.fill",
                     iconColor: Color(hex: "667eea"),
                     value: $defaultReminderDays,
@@ -121,8 +123,8 @@ struct SettingsView: View {
 
                 rowDivider()
                 toggleRow(
-                    label: "Daily Summary",
-                    subtitle: "A daily digest of your items",
+                    label: L("settings.dailySummary"),
+                    subtitle: L("settings.dailySummary.subtitle"),
                     icon: "newspaper.fill",
                     iconColor: Color(hex: "764ba2"),
                     isOn: $dailySummaryEnabled
@@ -134,7 +136,7 @@ struct SettingsView: View {
                 if dailySummaryEnabled {
                     rowDivider()
                     stepperRow(
-                        label: "Summary Time",
+                        label: L("settings.summaryTime"),
                         valueText: "\(dailySummaryHour):00",
                         icon: "alarm.fill",
                         iconColor: Color(hex: "F7971E"),
@@ -151,10 +153,10 @@ struct SettingsView: View {
 
     // MARK: - Defaults Section
     private var defaultsSection: some View {
-        sectionCard(title: "Item Defaults", icon: "slider.horizontal.3", iconColor: Color(hex: "667eea")) {
+        sectionCard(title: L("settings.defaults"), icon: "slider.horizontal.3", iconColor: Color(hex: "667eea")) {
             HStack(spacing: 14) {
                 iconCircle(defaultCategory.icon, color: defaultCategory.color)
-                Text("Category")
+                Text(L("settings.defaults.category"))
                     .font(.system(size: 15, weight: .medium))
                     .lineLimit(1)
                 Spacer(minLength: 8)
@@ -173,7 +175,7 @@ struct SettingsView: View {
 
             HStack(spacing: 14) {
                 iconCircle(defaultLocation.icon, color: Color(hex: "11998e"))
-                Text("Location")
+                Text(L("settings.defaults.location"))
                     .font(.system(size: 15, weight: .medium))
                     .lineLimit(1)
                 Spacer(minLength: 8)
@@ -187,6 +189,36 @@ struct SettingsView: View {
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 14)
+        }
+    }
+
+    // MARK: - Language Section
+    private var languageSection: some View {
+        sectionCard(title: L("settings.language.section"), icon: "globe", iconColor: Color(hex: "11998e")) {
+            ForEach(Array(LanguageManager.supported.enumerated()), id: \.element.code) { index, lang in
+                VStack(spacing: 0) {
+                    if index > 0 { rowDivider() }
+                    Button {
+                        languageManager.selectedLanguage = lang.code
+                    } label: {
+                        HStack(spacing: 14) {
+                            iconCircle("globe", color: Color(hex: "11998e"))
+                            Text(lang.nativeName)
+                                .font(.system(size: 15, weight: .medium))
+                                .foregroundStyle(.primary)
+                            Spacer(minLength: 8)
+                            if languageManager.selectedLanguage == lang.code {
+                                Image(systemName: "checkmark")
+                                    .font(.system(size: 14, weight: .semibold))
+                                    .foregroundStyle(Color(hex: "667eea"))
+                            }
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 14)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
         }
     }
 

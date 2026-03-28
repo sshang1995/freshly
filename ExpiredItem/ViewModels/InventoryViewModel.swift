@@ -1,10 +1,14 @@
 import SwiftUI
 
 enum SortOption: String, CaseIterable {
-    case expirationDate = "Expiration Date"
-    case name = "Name"
-    case category = "Category"
-    case dateAdded = "Date Added"
+    case expirationDate = "expirationDate"
+    case name = "name"
+    case category = "category"
+    case dateAdded = "dateAdded"
+
+    var displayName: String {
+        L("sort.\(rawValue)")
+    }
 }
 
 @Observable
@@ -23,51 +27,37 @@ final class InventoryViewModel {
         selectedCategory != nil || selectedLocation != nil
     }
 
+    func clearFilters() {
+        selectedCategory = nil
+        selectedLocation = nil
+    }
+
     func update(items: [Item]) {
-        var result = items
+        var result = items.filter { $0.completionStateRaw == selectedCompletionState.rawValue }
 
-        // Filter by completion state
-        result = result.filter { $0.completionState == selectedCompletionState }
-
-        // Search
-        if !searchText.isEmpty {
-            result = result.filter {
-                $0.name.localizedCaseInsensitiveContains(searchText) ||
-                $0.category.displayName.localizedCaseInsensitiveContains(searchText) ||
-                $0.location.displayName.localizedCaseInsensitiveContains(searchText) ||
-                ($0.notes?.localizedCaseInsensitiveContains(searchText) ?? false)
-            }
-        }
-
-        // Category filter
         if let cat = selectedCategory {
-            result = result.filter { $0.category == cat }
+            result = result.filter { $0.categoryRaw == cat.rawValue }
         }
-
-        // Location filter
         if let loc = selectedLocation {
             result = result.filter { $0.locationRaw == loc }
         }
+        if !searchText.isEmpty {
+            result = result.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+        }
 
-        // Sort
-        result = result.sorted {
+        result.sort { (a: Item, b: Item) -> Bool in
             switch sortOption {
             case .expirationDate:
-                return isAscending ? $0.expirationDate < $1.expirationDate : $0.expirationDate > $1.expirationDate
+                return isAscending ? a.expirationDate < b.expirationDate : a.expirationDate > b.expirationDate
             case .name:
-                return isAscending ? $0.name < $1.name : $0.name > $1.name
+                return isAscending ? a.name < b.name : a.name > b.name
             case .category:
-                return isAscending ? $0.categoryRaw < $1.categoryRaw : $0.categoryRaw > $1.categoryRaw
+                return isAscending ? a.categoryRaw < b.categoryRaw : a.categoryRaw > b.categoryRaw
             case .dateAdded:
-                return isAscending ? $0.createdAt < $1.createdAt : $0.createdAt > $1.createdAt
+                return isAscending ? a.createdAt < b.createdAt : a.createdAt > b.createdAt
             }
         }
 
         filteredItems = result
-    }
-
-    func clearFilters() {
-        selectedCategory = nil
-        selectedLocation = nil
     }
 }

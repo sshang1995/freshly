@@ -7,25 +7,25 @@ struct ContentView: View {
         TabView(selection: $selectedTab) {
             HomeView()
                 .tabItem {
-                    Label("Home", systemImage: "house.fill")
+                    Label(L("tab.home"), systemImage: "house.fill")
                 }
                 .tag(0)
 
             InventoryView()
                 .tabItem {
-                    Label("Inventory", systemImage: "list.bullet.rectangle.fill")
+                    Label(L("tab.inventory"), systemImage: "list.bullet.rectangle.fill")
                 }
                 .tag(1)
 
             AddItemTabView(selectedTab: $selectedTab)
                 .tabItem {
-                    Label("Add", systemImage: "plus.circle.fill")
+                    Label(L("tab.add"), systemImage: "plus.circle.fill")
                 }
                 .tag(2)
 
             SettingsView()
                 .tabItem {
-                    Label("Settings", systemImage: "gear")
+                    Label(L("tab.settings"), systemImage: "gear")
                 }
                 .tag(3)
         }

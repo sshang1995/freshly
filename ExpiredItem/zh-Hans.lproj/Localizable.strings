@@ -1,0 +1,201 @@
+// Navigation Tabs
+"tab.home" = "主页";
+"tab.inventory" = "库存";
+"tab.add" = "添加";
+"tab.settings" = "设置";
+
+// Greetings
+"home.greeting.morning" = "早上好 ☀️";
+"home.greeting.afternoon" = "下午好 👋";
+"home.greeting.evening" = "晚上好 🌙";
+
+// Home - Empty State
+"home.empty.title" = "暂无内容";
+"home.empty.message" = "添加您的第一件物品以\n开始跟踪保质期。";
+"home.empty.button" = "添加第一件物品";
+
+// Home - Sections
+"home.section.allItems" = "所有物品";
+"home.section.showAll" = "显示全部";
+"home.noItemsMessage" = "此分类暂无物品。";
+
+// Home - Recipe
+"home.recipe.title" = "AI 食谱推荐";
+"home.recipe.refresh" = "刷新";
+"home.recipe.generating" = "正在生成食谱推荐...";
+"home.recipe.noIngredients" = "暂无即将过期的食材。";
+"home.recipe.tapForRecipe" = "点击查看完整食谱";
+"home.recipe.expiringItems" = "%d件即将过期";
+"home.recipe.navTitle" = "食谱";
+"home.recipe.ingredients" = "食材";
+"home.recipe.instructions" = "步骤";
+"home.recipe.label" = "AI 食谱推荐";
+"home.recipe.steps" = "%d步";
+"home.recipe.ingredientsCount" = "%d种食材";
+
+// Item Status
+"status.fresh" = "新鲜";
+"status.expiringSoon" = "即将过期";
+"status.expired" = "已过期";
+"status.soon" = "快过期";
+
+// Categories
+"category.produce" = "农产品";
+"category.dairy" = "乳制品";
+"category.meat" = "肉类";
+"category.bakery" = "烘焙";
+"category.frozen" = "冷冻食品";
+"category.beverages" = "饮料";
+"category.condiments" = "调味品";
+"category.snacks" = "零食";
+"category.medicine" = "药品";
+"category.cosmetics" = "化妆品";
+"category.other" = "其他";
+
+// Locations
+"location.fridge" = "冰箱";
+"location.freezer" = "冷冻室";
+"location.pantry" = "食品储藏室";
+"location.cabinet" = "橱柜";
+"location.counter" = "台面";
+"location.custom" = "自定义";
+
+// Completion States
+"state.active" = "活跃";
+"state.consumed" = "已消耗";
+"state.discarded" = "已丢弃";
+
+// Sort Options
+"sort.expirationDate" = "过期日期";
+"sort.name" = "名称";
+"sort.category" = "类别";
+"sort.dateAdded" = "添加日期";
+
+// Inventory
+"inventory.searchPlaceholder" = "搜索物品...";
+"inventory.empty.nothingYet" = "暂无内容";
+"inventory.empty.noResults" = "无结果";
+"inventory.empty.addItems" = "添加物品开始跟踪保质期。";
+"inventory.empty.adjustSearch" = "请调整搜索或筛选条件。";
+"inventory.empty.addItem" = "添加物品";
+"inventory.action.delete" = "删除";
+"inventory.action.consumed" = "已消耗";
+
+// Filter
+"filter.title" = "筛选与排序";
+"filter.category" = "类别";
+"filter.location" = "位置";
+"filter.sortBy" = "排序方式";
+"filter.all" = "全部";
+"filter.reset" = "重置";
+"filter.done" = "完成";
+
+// Item Form
+"form.section.itemDetails" = "物品详情";
+"form.section.category" = "类别";
+"form.section.location" = "位置";
+"form.section.expiration" = "过期日期";
+"form.section.reminder" = "提醒";
+"form.section.notes" = "备注";
+"form.field.name" = "名称";
+"form.field.quantity" = "数量";
+"form.field.namePlaceholder" = "例如：全脂牛奶";
+"form.field.quantityPlaceholder" = "可选";
+"form.field.customName" = "自定义名称";
+"form.field.customNamePlaceholder" = "例如：车库货架";
+"form.field.notesPlaceholder" = "添加备注...（可选）";
+"form.date.expiresOn" = "过期时间";
+"form.date.purchasedOn" = "购买日期";
+"form.date.trackPurchase" = "记录购买日期";
+"form.reminder.remindMe" = "提醒我";
+"form.reminder.dayBefore" = "提前%d天";
+"form.reminder.daysBefore" = "提前%d天";
+
+// Add Item
+"addItem.title" = "新物品";
+"addItem.scanBarcode" = "扫描条形码";
+"addItem.save" = "保存";
+"addItem.cancel" = "取消";
+"addItem.lookingUp" = "正在查找产品…";
+
+// Edit Item
+"editItem.title" = "编辑物品";
+"editItem.save" = "保存";
+"editItem.cancel" = "取消";
+
+// Item Detail
+"detail.expires" = "过期时间";
+"detail.daysLeft" = "剩余天数";
+"detail.purchased" = "购买日期";
+"detail.category" = "类别";
+"detail.location" = "位置";
+"detail.quantity" = "数量";
+"detail.reminder" = "提醒";
+"detail.notes" = "备注";
+"detail.edit" = "编辑";
+"detail.delete" = "删除物品";
+"detail.consumed" = "已消耗";
+"detail.discard" = "丢弃";
+"detail.deleteDialogTitle" = "删除\"%@\"？";
+"detail.deleteConfirm" = "此操作无法撤销。";
+"detail.cancel" = "取消";
+"detail.today" = "今天";
+"detail.tomorrow" = "明天";
+"detail.daysAgo" = "%d天前";
+"detail.daysLeft.format" = "%d天";
+"detail.dayBefore" = "提前%d天";
+"detail.daysBefore" = "提前%d天";
+
+// Settings
+"settings.version" = "版本 1.0.0";
+"settings.notifications" = "通知";
+"settings.notifications.off" = "通知已关闭";
+"settings.notifications.tapEnable" = "点击启用以获取提醒";
+"settings.notifications.enable" = "启用";
+"settings.notifications.subtitle" = "在物品过期前获取提醒";
+"settings.reminder.default" = "默认提醒";
+"settings.reminder.dBefore" = "提前%d天";
+"settings.dailySummary" = "每日摘要";
+"settings.dailySummary.subtitle" = "每日物品摘要";
+"settings.summaryTime" = "摘要时间";
+"settings.defaults" = "物品默认值";
+"settings.defaults.category" = "类别";
+"settings.defaults.location" = "位置";
+"settings.language" = "语言";
+"settings.language.section" = "语言";
+"settings.language.choose" = "选择语言";
+
+// Receipt Scanning
+"receipt.scan.button" = "扫描收据";
+"receipt.scanner.instruction" = "将相机对准收据";
+"receipt.review.title" = "收据物品";
+"receipt.review.processing" = "正在读取收据...";
+"receipt.review.addItems" = "添加%d件物品";
+"receipt.review.noItems" = "未检测到食品";
+"receipt.review.cancel" = "取消";
+"receipt.review.retry" = "重试";
+"receipt.review.quantity" = "数量";
+"receipt.review.expiry" = "过期";
+
+// Onboarding
+"onboarding.welcome.title" = "欢迎使用 Freshly";
+"onboarding.welcome.subtitle" = "永远不要让食物过期。追踪您的物品，在过期前获得提醒。";
+"onboarding.feature.track" = "追踪物品";
+"onboarding.feature.track.desc" = "添加带有过期日期的物品";
+"onboarding.feature.remind" = "获取提醒";
+"onboarding.feature.remind.desc" = "物品过期前的通知";
+"onboarding.feature.organize" = "保持整洁";
+"onboarding.feature.organize.desc" = "按状态和类别浏览";
+"onboarding.notif.title" = "提前了解过期信息";
+"onboarding.notif.subtitle" = "开启通知，在物品过期前及时收到提醒。";
+"onboarding.notif.example1.title" = "即将过期";
+"onboarding.notif.example1.body" = "牛奶将在3天后过期";
+"onboarding.notif.example2.title" = "今日过期";
+"onboarding.notif.example2.body" = "酸奶今天就要过期了！";
+"onboarding.reminder.title" = "设置默认提醒";
+"onboarding.reminder.subtitle" = "您希望在物品过期前几天收到默认提醒？";
+"onboarding.reminder.customizeNote" = "添加物品时可以为每件物品单独设置。";
+"onboarding.reminder.daysBefore" = "提前%d%@天到期";
+"onboarding.back" = "返回";
+"onboarding.next" = "下一步";
+"onboarding.getStarted" = "开始使用";

@@ -30,7 +30,7 @@ struct ItemDetailView: View {
         .toolbar {
             if item.completionState == .active {
                 ToolbarItem(placement: .primaryAction) {
-                    Button("Edit") { showEditSheet = true }
+                    Button(L("detail.edit")) { showEditSheet = true }
                         .fontWeight(.semibold)
                         .foregroundStyle(Color(hex: "667eea"))
                 }
@@ -39,14 +39,14 @@ struct ItemDetailView: View {
         .sheet(isPresented: $showEditSheet) {
             EditItemSheet(item: item)
         }
-        .confirmationDialog("Delete \"\(item.name)\"?", isPresented: $showDeleteConfirm, titleVisibility: .visible) {
-            Button("Delete", role: .destructive) {
+        .confirmationDialog(String(format: L("detail.deleteDialogTitle"), item.name), isPresented: $showDeleteConfirm, titleVisibility: .visible) {
+            Button(L("detail.delete"), role: .destructive) {
                 ItemFormViewModel(item: item).delete(item: item, context: context)
                 dismiss()
             }
-            Button("Cancel", role: .cancel) {}
+            Button(L("detail.cancel"), role: .cancel) {}
         } message: {
-            Text("This action cannot be undone.")
+            Text(L("detail.deleteConfirm"))
         }
     }
 
@@ -57,7 +57,6 @@ struct ItemDetailView: View {
                 .fill(item.status.gradient)
                 .frame(height: 160)
 
-            // Decorative circle
             Circle()
                 .fill(.white.opacity(0.1))
                 .frame(width: 120, height: 120)
@@ -88,12 +87,12 @@ struct ItemDetailView: View {
     // MARK: - Expiry Card
     private var expiryCard: some View {
         HStack(spacing: 0) {
-            expiryColumn(title: "Expires", value: item.expirationDate.shortFormatted)
+            expiryColumn(title: L("detail.expires"), value: item.expirationDate.shortFormatted)
             Divider().frame(height: 40)
-            expiryColumn(title: "Days Left", value: daysLeftText, valueColor: item.status.color)
+            expiryColumn(title: L("detail.daysLeft"), value: daysLeftText, valueColor: item.status.color)
             if let purchase = item.purchaseDate {
                 Divider().frame(height: 40)
-                expiryColumn(title: "Purchased", value: purchase.shortFormatted)
+                expiryColumn(title: L("detail.purchased"), value: purchase.shortFormatted)
             }
         }
         .padding(.vertical, 16)
@@ -119,15 +118,21 @@ struct ItemDetailView: View {
     // MARK: - Details Card
     private var detailsCard: some View {
         VStack(spacing: 0) {
-            detailRow(icon: item.category.icon, iconColor: item.category.color, label: "Category", value: item.category.displayName)
+            detailRow(icon: item.category.icon, iconColor: item.category.color, label: L("detail.category"), value: item.category.displayName)
             Divider().padding(.leading, 52)
-            detailRow(icon: item.location.icon, iconColor: Color(hex: "667eea"), label: "Location", value: item.location.displayName)
+            detailRow(icon: item.location.icon, iconColor: Color(hex: "667eea"), label: L("detail.location"), value: item.location.displayName)
             if let qty = item.quantity, !qty.isEmpty {
                 Divider().padding(.leading, 52)
-                detailRow(icon: "number.circle.fill", iconColor: Color(hex: "764ba2"), label: "Quantity", value: qty)
+                detailRow(icon: "number.circle.fill", iconColor: Color(hex: "764ba2"), label: L("detail.quantity"), value: qty)
             }
             Divider().padding(.leading, 52)
-            detailRow(icon: "bell.fill", iconColor: .orange, label: "Reminder", value: "\(item.reminderOffsetDays) day\(item.reminderOffsetDays == 1 ? "" : "s") before")
+            let reminderDays = item.reminderOffsetDays
+            detailRow(
+                icon: "bell.fill",
+                iconColor: .orange,
+                label: L("detail.reminder"),
+                value: Lf(reminderDays == 1 ? "detail.dayBefore" : "detail.daysBefore", reminderDays)
+            )
         }
         .background(Color(.secondarySystemGroupedBackground))
         .clipShape(RoundedRectangle(cornerRadius: 16))
@@ -159,7 +164,7 @@ struct ItemDetailView: View {
     // MARK: - Notes Card
     private func notesCard(_ notes: String) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Label("Notes", systemImage: "note.text")
+            Label(L("detail.notes"), systemImage: "note.text")
                 .font(.system(size: 13, weight: .semibold))
                 .foregroundStyle(.secondary)
                 .textCase(.uppercase)
@@ -179,13 +184,13 @@ struct ItemDetailView: View {
     private var actionButtons: some View {
         HStack(spacing: 12) {
             actionButton(
-                label: "Consumed",
+                label: L("detail.consumed"),
                 icon: "checkmark.circle.fill",
                 colors: [Color(hex: "11998e"), Color(hex: "38ef7d")]
             ) { markComplete(state: .consumed) }
 
             actionButton(
-                label: "Discard",
+                label: L("detail.discard"),
                 icon: "trash.circle.fill",
                 colors: [Color(hex: "F7971E"), Color(hex: "FFD200")]
             ) { markComplete(state: .discarded) }
@@ -242,7 +247,7 @@ struct ItemDetailView: View {
             HStack(spacing: 8) {
                 Image(systemName: "trash")
                     .font(.system(size: 14, weight: .medium))
-                Text("Delete Item")
+                Text(L("detail.delete"))
                     .font(.system(size: 15, weight: .medium))
             }
             .foregroundStyle(.red)
@@ -257,10 +262,10 @@ struct ItemDetailView: View {
     private var daysLeftText: String {
         let days = item.daysUntilExpiration
         switch days {
-        case ..<0: return "\(abs(days))d ago"
-        case 0: return "Today"
-        case 1: return "Tomorrow"
-        default: return "\(days) days"
+        case ..<0: return Lf("detail.daysAgo", abs(days))
+        case 0: return L("detail.today")
+        case 1: return L("detail.tomorrow")
+        default: return Lf("detail.daysLeft.format", days)
         }
     }
 
@@ -287,14 +292,14 @@ private struct EditItemSheet: View {
     var body: some View {
         NavigationStack {
             ItemFormView(viewModel: viewModel)
-                .navigationTitle("Edit Item")
+                .navigationTitle(L("editItem.title"))
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel") { dismiss() }
+                        Button(L("editItem.cancel")) { dismiss() }
                     }
                     ToolbarItem(placement: .confirmationAction) {
-                        Button("Save") {
+                        Button(L("editItem.save")) {
                             Task {
                                 isSaving = true
                                 await viewModel.save(context: context)

@@ -10,49 +10,34 @@ struct InventoryView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                // Custom header
                 headerSection
                     .padding(.horizontal, 20)
                     .padding(.top, 8)
                     .padding(.bottom, 12)
 
-                // Segmented state picker
                 statePicker
                     .padding(.horizontal, 20)
                     .padding(.bottom, 12)
 
-                // Content
                 if viewModel.filteredItems.isEmpty {
                     EmptyStateView(
                         icon: allItems.isEmpty ? "leaf.fill" : "magnifyingglass",
-                        title: allItems.isEmpty ? "Nothing here yet" : "No Results",
+                        title: allItems.isEmpty ? L("inventory.empty.nothingYet") : L("inventory.empty.noResults"),
                         message: allItems.isEmpty
-                            ? "Add items to start tracking expirations."
-                            : "Try adjusting your search or filters.",
-                        actionTitle: allItems.isEmpty ? "Add Item" : nil,
+                            ? L("inventory.empty.addItems")
+                            : L("inventory.empty.adjustSearch"),
+                        actionTitle: allItems.isEmpty ? L("inventory.empty.addItem") : nil,
                         action: allItems.isEmpty ? { showAddSheet = true } : nil
                     )
                 } else {
                     ScrollView {
                         LazyVStack(spacing: 10) {
                             ForEach(viewModel.filteredItems) { item in
-                                NavigationLink(destination: ItemDetailView(item: item)) {
-                                    ItemRowView(item: item)
-                                }
-                                .buttonStyle(.plain)
-                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                    Button(role: .destructive) {
-                                        deleteItem(item)
-                                    } label: {
-                                        Label("Delete", systemImage: "trash")
-                                    }
-                                    if item.completionState == .active {
-                                        Button { markConsumed(item) } label: {
-                                            Label("Consumed", systemImage: "checkmark.circle")
-                                        }
-                                        .tint(.green)
-                                    }
-                                }
+                                SwipeableItemRow(
+                                    item: item,
+                                    onDelete: { deleteItem(item) },
+                                    onConsume: item.completionState == .active ? { markConsumed(item) } : nil
+                                )
                             }
                         }
                         .padding(.horizontal, 20)
@@ -82,12 +67,11 @@ struct InventoryView: View {
     // MARK: - Header
     private var headerSection: some View {
         HStack(spacing: 10) {
-            // Search bar
             HStack(spacing: 8) {
                 Image(systemName: "magnifyingglass")
                     .foregroundStyle(.secondary)
                     .font(.system(size: 15))
-                TextField("Search items...", text: $viewModel.searchText)
+                TextField(L("inventory.searchPlaceholder"), text: $viewModel.searchText)
                     .font(.system(size: 15))
                 if !viewModel.searchText.isEmpty {
                     Button { viewModel.searchText = "" } label: {
@@ -101,7 +85,6 @@ struct InventoryView: View {
             .background(Color(.secondarySystemGroupedBackground))
             .clipShape(RoundedRectangle(cornerRadius: 14))
 
-            // Filter button
             Button { viewModel.showFilterSheet = true } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 14)
@@ -116,14 +99,14 @@ struct InventoryView: View {
                 }
             }
 
-            // Add button
             Button { showAddSheet = true } label: {
                 ZStack {
                     Circle()
                         .fill(
                             LinearGradient(
                                 colors: [Color(hex: "667eea"), Color(hex: "764ba2")],
-                                startPoint: .topLeading, endPoint: .bottomTrailing
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
                             )
                         )
                         .frame(width: 44, height: 44)

@@ -8,10 +8,9 @@ struct FilterView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
-                    // Category chips
-                    filterSection(title: "Category") {
+                    filterSection(title: L("filter.category")) {
                         LazyVGrid(columns: [GridItem(.adaptive(minimum: 100), spacing: 10)], spacing: 10) {
-                            chipButton(label: "All", icon: "square.grid.2x2", isSelected: viewModel.selectedCategory == nil) {
+                            chipButton(label: L("filter.all"), icon: "square.grid.2x2", isSelected: viewModel.selectedCategory == nil) {
                                 viewModel.selectedCategory = nil
                             }
                             ForEach(Category.allCases) { cat in
@@ -22,10 +21,9 @@ struct FilterView: View {
                         }
                     }
 
-                    // Location chips
-                    filterSection(title: "Location") {
+                    filterSection(title: L("filter.location")) {
                         LazyVGrid(columns: [GridItem(.adaptive(minimum: 100), spacing: 10)], spacing: 10) {
-                            chipButton(label: "All", icon: "mappin.and.ellipse", isSelected: viewModel.selectedLocation == nil) {
+                            chipButton(label: L("filter.all"), icon: "mappin.and.ellipse", isSelected: viewModel.selectedLocation == nil) {
                                 viewModel.selectedLocation = nil
                             }
                             ForEach([Location.fridge, .freezer, .pantry, .cabinet, .counter], id: \.self) { loc in
@@ -36,8 +34,7 @@ struct FilterView: View {
                         }
                     }
 
-                    // Sort options
-                    filterSection(title: "Sort By") {
+                    filterSection(title: L("filter.sortBy")) {
                         VStack(spacing: 8) {
                             let options = SortOption.allCases
                             ForEach(options, id: \.self) { option in
@@ -49,11 +46,11 @@ struct FilterView: View {
                 .padding(20)
             }
             .background(Color(.systemGroupedBackground))
-            .navigationTitle("Filter & Sort")
+            .navigationTitle(L("filter.title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Reset") {
+                    Button(L("filter.reset")) {
                         viewModel.clearFilters()
                         viewModel.sortOption = .expirationDate
                         viewModel.isAscending = true
@@ -62,7 +59,7 @@ struct FilterView: View {
                     .fontWeight(.medium)
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") { dismiss() }
+                    Button(L("filter.done")) { dismiss() }
                         .fontWeight(.semibold)
                         .foregroundStyle(Color(hex: "667eea"))
                 }
@@ -126,7 +123,7 @@ struct FilterView: View {
             }
         } label: {
             HStack {
-                Text(option.rawValue)
+                Text(option.displayName)
                     .font(.system(size: 15, weight: isSelected ? .semibold : .regular))
                     .foregroundStyle(isSelected ? Color(hex: "667eea") : .primary)
                 Spacer()
