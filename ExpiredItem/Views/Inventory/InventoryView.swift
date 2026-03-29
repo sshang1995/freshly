@@ -9,16 +9,8 @@ struct InventoryView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                headerSection
-                    .padding(.horizontal, 20)
-                    .padding(.top, 8)
-                    .padding(.bottom, 12)
-
-                statePicker
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 12)
-
+            // ScrollView (or empty state) is the direct root — gets the full NavigationStack height
+            Group {
                 if viewModel.filteredItems.isEmpty {
                     EmptyStateView(
                         icon: allItems.isEmpty ? "leaf.fill" : "magnifyingglass",
@@ -31,7 +23,7 @@ struct InventoryView: View {
                     )
                 } else {
                     ScrollView {
-                        LazyVStack(spacing: 10) {
+                        LazyVStack(spacing: 0) {
                             ForEach(viewModel.filteredItems) { item in
                                 SwipeableItemRow(
                                     item: item,
@@ -44,6 +36,20 @@ struct InventoryView: View {
                         .padding(.bottom, 32)
                     }
                 }
+            }
+            // Header + picker float above the scroll content without affecting its height
+            .safeAreaInset(edge: .top, spacing: 0) {
+                VStack(spacing: 0) {
+                    headerSection
+                        .padding(.horizontal, 20)
+                        .padding(.top, 8)
+                        .padding(.bottom, 12)
+
+                    statePicker
+                        .padding(.horizontal, 20)
+                        .padding(.bottom, 12)
+                }
+                .background(Color(.systemGroupedBackground))
             }
             .background(Color(.systemGroupedBackground))
             .navigationBarHidden(true)
@@ -156,10 +162,14 @@ struct InventoryView: View {
     }
 
     private func deleteItem(_ item: Item) {
-        ItemFormViewModel(item: item).delete(item: item, context: context)
+        withAnimation(.easeOut(duration: 0.25)) {
+            ItemFormViewModel(item: item).delete(item: item, context: context)
+        }
     }
 
     private func markConsumed(_ item: Item) {
-        ItemFormViewModel(item: item).markComplete(item: item, state: .consumed, context: context)
+        withAnimation(.easeOut(duration: 0.25)) {
+            ItemFormViewModel(item: item).markComplete(item: item, state: .consumed, context: context)
+        }
     }
 }

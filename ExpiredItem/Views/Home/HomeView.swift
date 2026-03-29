@@ -46,7 +46,9 @@ struct HomeView: View {
             }
             .sheet(isPresented: $showReceiptScanner, onDismiss: {
                 if scannedReceiptImage != nil {
-                    showReceiptReview = true
+                    DispatchQueue.main.async {
+                        showReceiptReview = true
+                    }
                 }
             }) {
                 ReceiptScannerView(
@@ -273,7 +275,7 @@ struct HomeView: View {
                     }
                 }
 
-                LazyVStack(spacing: 10) {
+                LazyVStack(spacing: 0) {
                     ForEach(displayItems) { item in
                         SwipeableItemRow(
                             item: item,
@@ -345,11 +347,15 @@ struct HomeView: View {
     // MARK: - Actions
 
     private func deleteItem(_ item: Item) {
-        ItemFormViewModel(item: item).delete(item: item, context: context)
+        withAnimation(.easeOut(duration: 0.25)) {
+            ItemFormViewModel(item: item).delete(item: item, context: context)
+        }
     }
 
     private func markConsumed(_ item: Item) {
-        ItemFormViewModel(item: item).markComplete(item: item, state: .consumed, context: context)
+        withAnimation(.easeOut(duration: 0.25)) {
+            ItemFormViewModel(item: item).markComplete(item: item, state: .consumed, context: context)
+        }
     }
 
     // MARK: - Helpers
