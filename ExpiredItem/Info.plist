@@ -17,18 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>2.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Freshly uses the camera to scan product barcodes so you can add items without typing.</string>
-	<key>NSUserNotificationUsageDescription</key>
-	<string>Freshly reminds you before items expire.</string>
-	<key>UIApplicationSceneManifest</key>
-	<dict>
-		<key>UIApplicationSupportsMultipleScenes</key>
-		<false/>
-	</dict>
+	<string>2</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
@@ -40,13 +33,20 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
-	<key>UILaunchScreen</key>
-	<dict/>
+	<key>NSCameraUsageDescription</key>
+	<string>Freshly uses the camera to scan product barcodes so you can add items without typing.</string>
+	<key>NSUserNotificationUsageDescription</key>
+	<string>Freshly reminds you before items expire.</string>
 	<key>RECIPE_PROXY_TOKEN</key>
 	<string>$(RECIPE_PROXY_TOKEN)</string>
 	<key>RECIPE_PROXY_URL</key>
 	<string>$(RECIPE_PROXY_URL)</string>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+	</dict>
+	<key>UILaunchScreen</key>
+	<dict/>
 </dict>
 </plist>
